@@ -65,7 +65,7 @@ Data types in python
 
         13. sort(): Sort a List in ascending, descending, or user-defined order
                         lists = [1,4,5,6,7,2]
-                        lists.sort()
+                          lists.sort()
                         #CANNOT GIVE MULTIPLE DATA TYEPES AS INPUT
 
                         #needs to be a set of same data type
