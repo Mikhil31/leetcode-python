@@ -1,0 +1,122 @@
+Tree is a recursive DSA where the child node itself is a node inside the parent
+
+TREE IS A FORM NON CYCLIC GRAPH
+GRAPH IS A SET OF VERTICES AND EDGES CONNECTED TO EACH OTHER 
+
+EVERY GRAPH IS A TREE BUT EVERY TREE MAY OR NOT BE A TREE
+
+Implemented with nested dict in Leetcode
+
+TreeNode{val: 4, left: TreeNode{val: 2, left: TreeNode{val: 1, left: None, right: None}, right: TreeNode{val: 3, left: None, right: None}}, right: TreeNode{val: 7, left: TreeNode{val: 6, left: None, right: None}, right: TreeNode{val: 9, left: None, right: None}}}
+
+                                   4
+                                  / \
+                                 2   7
+                                / \ / \
+                               1  3 6  9
+
+
+A binary tree only has 2 nodes on either sides
+
+                                4
+                              /   \
+                             2     6
+                            / \   / \
+                           1  3   5  7
+                                  \
+                                    9
+
+HERE 4 > 2, and 4 < 6
+similarly for the next nodes 1 < 2 and 3 > 2
+
+THEREFORE THIS IS A BINARY TREE
+
+Conditions for a binary tree
+
+    1. The nodes on the Left of the tree must be greater  
+    2. The nodes on the Right of the tree must be lesser
+    3. Elements are always unique
+
+Applications: 
+    1. Searching: 
+        eg: if target = 7, it starts are root(4) and 7 > 4 so and search in right
+
+        6 > 7 and 6 != 7 so skip and search in right
+    
+    2. Insertion: 
+        eg: we want to insert 0 into the arr, check root (4) 4 > 0, so 0 goes to the left of tree
+
+            compare with 2 and 2 > 0 so 0 goes to the left of the node 
+            
+            compare with 1 and 1 > 0 so 0 goes to the left of the node 
+            and insertion is done as the child node of 1
+
+                          (Root)4
+        Level 0 (with root)_____________
+                              /   \
+                             2     6    (Level 1)
+                            / \   / \
+                  (nodes)  1  3   5  7  (Level 2)
+                          /       \
+                (leaves) 0           9   (Level 3)
+
+Leaves: (0,9,7) {leaf}
+
+No of nodes are each level: No of nodes(level i) = 2^i
+
+
+
+                    TRAVERSING ALGO IN BINARY TREE
+
+Traversing: visiting every vertex in the tree atleast once
+
+1. Breath first Search (BFS)
+2. Depth First Search (DFS)
+
+Breath First Search goes according to levels in a graph 
+
+                                4
+                              /   \
+                             2     6
+                            / \   / \
+                           1  3   5  7
+                                  \
+                                    9
+
+Implemented AS QUEUE (FIRST IN FIRST OUT)
+order: 4 -> 2 -> 6 -> 1 -> 3 -> 5 -> 7 -> 9
+BFS CAN HAVE MANY ORDERS
+
+starts with 4, and "explore" all nodes connected to graph and then enter a random node connected to a graph
+
+From there pop() 4 out of queue and insert both 2 and 6, and pop() 2 and so on 
+
+the order can vary and any node can be visited first and last, we can start at 5 also
+
+
+DEPTH FIRST SEARCH O(V+E)
+
+Implemented using stack (and uses backtracking )
+
+                                4
+                              /   \
+                             2     6
+                            / \   / \
+                           1  3   5  7
+                                  \
+                                    9
+
+order: 4 -> 2 -> 1 ... (no other node, so backtrack, knows to take 2 coz last enetered element in stack) 
+
+       4 -> 2 -> 1 -> 2 -> 3 -> 2 -> 4 -> 6 -> 5 -> 9 -> 6 -> 7
+
+    push(4) -> push(2) -> push(1) -> pop(1) [no other path] -> push(3) -> pop(3) -> pop(2) -> pop(4) -> push(6)... and so on
+
+pop() only if graph is not traversed and node has no other child (.right, .left==0 or arr of child == 0)
+
+                                PREORDER DFS
+
+Easiest to Implemented in DFS 
+
+From root node, add children into stack and pop the curr node: 
+eg: push(4) -> pop(4) -> push(2) ->  push (6) etc... 
